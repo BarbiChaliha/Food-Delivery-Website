@@ -9,10 +9,23 @@ import 'dotenv/config'
 import cartRouter from "./routes/cartRoute.js"
 import orderRouter from "./routes/orderRoute.js"
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 
 //app config
 const app = express() //we have initialied our const app with express package
 const port = 4000//port no. where our server will be running
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Serve static files from React build
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+});
+
 
 //middleware
 app.use(express.json())//when we get request from frontend to backend, that will be passed using this express.json
