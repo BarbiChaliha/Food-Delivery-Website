@@ -41,7 +41,7 @@ app.get("/",(req,res)=>{  //get method is a HTTP method using which we can reque
 // Serve static files from React build
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
 });
 
