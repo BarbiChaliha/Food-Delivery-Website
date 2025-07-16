@@ -19,13 +19,6 @@ const port = 4000//port no. where our server will be running
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Serve static files from React build
-app.use(express.static(path.join(__dirname, '../frontend/build')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
-});
-
 
 //middleware
 app.use(express.json())//when we get request from frontend to backend, that will be passed using this express.json
@@ -44,6 +37,14 @@ app.use("/api/order", orderRouter)
 app.get("/",(req,res)=>{  //get method is a HTTP method using which we can request the data from the server. there are other methods like delete, update, post etc. and they have different uses
     res.send("API Working")
 })
+
+// Serve static files from React build
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+});
+
 
 //now we will run express server
 //to run express server, we will do the following
